@@ -1,0 +1,277 @@
+<html><head><meta charset="utf-8"/><title>Test Report</title><style type="text/css">:root {
+  --text-primary: #111;
+  --text-secondary: #4f4f4f;
+  --success: #006633;
+  --success-bright: #80ffbf;
+  --danger: #cc071e;
+  --danger-bright: #fbdfe0;
+  --warning: #995c00;
+  --warning-bright: #ffeea8;
+  --panel: #eee;
+  --border: #949494;
+  --disabled: #6b6b6b;
+}
+
+html,
+body {
+  font-family: Arial, Helvetica, sans-serif;
+  font-size: 16px;
+  margin: 0;
+  padding: 0;
+  color: var(--text-primary);
+}
+body {
+  padding: 2rem 1rem;
+}
+.jesthtml-content {
+  margin: 0 auto;
+  max-width: 70rem;
+}
+header {
+  display: flex;
+  align-items: center;
+}
+#title {
+  margin: 0;
+  flex-grow: 1;
+}
+#logo {
+  height: 4rem;
+}
+#timestamp {
+  color: var(--text-secondary);
+  margin-top: 0.5rem;
+}
+
+#metadata-container {
+  display: flex;
+  flex-direction: column;
+  gap: 2rem;
+  margin-bottom: 2rem;
+}
+
+.additional-information-container {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  color: var(--text-secondary);
+}
+
+/** SUMMARY */
+#summary {
+  color: var(--text-primary);
+  display: flex;
+  font-family: monospace;
+  font-size: 1rem;
+}
+#summary > div {
+  margin-right: 0.5rem;
+  background: var(--panel);
+  padding: 1rem;
+  min-width: 15rem;
+}
+#summary > div:last-child {
+  margin-right: 0;
+}
+@media only screen and (max-width: 720px) {
+  #summary {
+    flex-direction: column;
+  }
+  #summary > div {
+    margin-right: 0;
+    margin-top: 1rem;
+  }
+  #summary > div:first-child {
+    margin-top: 0;
+  }
+}
+
+.summary-total {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+.summary-passed {
+  color: var(--success);
+  border-left: 0.4rem solid var(--success);
+  padding-left: 0.5rem;
+  margin-bottom: 0.15rem;
+}
+.summary-failed,
+.summary-obsolete-snapshots {
+  color: var(--danger);
+  border-left: 0.4rem solid var(--danger);
+  padding-left: 0.5rem;
+  margin-bottom: 0.15rem;
+}
+.summary-pending {
+  color: var(--warning);
+  border-left: 0.4rem solid var(--warning);
+  padding-left: 0.5rem;
+  margin-bottom: 0.15rem;
+}
+.summary-empty {
+  color: var(--disabled);
+  border-left: 0.4rem solid var(--disabled);
+  margin-bottom: 0.15rem;
+}
+
+.test-result {
+  padding: 1rem;
+  margin-bottom: 0.25rem;
+}
+.test-result:last-child {
+  border: 0;
+}
+.test-result.passed {
+  background-color: var(--success-bright);
+  color: var(--success);
+}
+.test-result.failed {
+  background-color: var(--danger-bright);
+  color: var(--danger);
+}
+.test-result.pending {
+  background-color: var(--warning-bright);
+  color: var(--warning);
+}
+
+.test-info {
+  display: flex;
+  justify-content: space-between;
+}
+.test-suitename {
+  width: 20%;
+  text-align: left;
+  font-weight: bold;
+  word-break: break-word;
+}
+.test-title {
+  width: 40%;
+  text-align: left;
+  font-style: italic;
+}
+.test-status {
+  width: 20%;
+  text-align: right;
+}
+.test-duration {
+  width: 10%;
+  text-align: right;
+  font-size: 0.85rem;
+}
+
+.failureMessages {
+  padding: 0 1rem;
+  margin-top: 1rem;
+  border-top: 1px dashed var(--danger);
+}
+.failureMessages.suiteFailure {
+  border-top: none;
+}
+.failureMsg {
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+
+.suite-container {
+  margin-bottom: 1rem;
+}
+.suite-info {
+  padding: 1rem;
+  background-color: var(--panel);
+  color: var(--text-secondary);
+  border: 0.15rem solid;
+  border-color: var(--panel);
+  display: flex;
+  align-items: center;
+  margin-bottom: 0.25rem;
+}
+.suite-info:hover {
+  border-color: var(--border);
+  cursor: pointer;
+}
+.suite-info .suite-path {
+  word-break: break-all;
+  flex-grow: 1;
+  font-family: monospace;
+  font-size: 1rem;
+}
+.suite-info .suite-time {
+  margin-left: 1rem;
+  padding: 0.2rem 0.3rem;
+  font-size: 0.85rem;
+}
+.suite-info .suite-time.warn {
+  background-color: var(--danger);
+  color: #fff;
+}
+.suite-info:before {
+  content: "\2303";
+  display: inline-block;
+  margin-right: 1rem;
+  transform: rotate(180deg) translateY(0.15rem);
+}
+.suite-container[open] .suite-info:before {
+  transform: rotate(0deg) translateY(0.15rem);
+}
+
+/* CONSOLE LOGS */
+.suite-consolelog {
+  margin-bottom: 0.25rem;
+  padding: 1rem;
+  background-color: var(--panel);
+}
+.suite-consolelog-header {
+  font-weight: bold;
+}
+.suite-consolelog-item {
+  padding: 0.5rem;
+}
+.suite-consolelog-item pre {
+  margin: 0.5rem 0;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+.suite-consolelog-item-origin {
+  color: var(--text-secondary);
+  font-weight: bold;
+}
+.suite-consolelog-item-message {
+  color: var(--text-primary);
+  font-size: 1rem;
+  padding: 0 0.5rem;
+}
+
+/* OBSOLETE SNAPSHOTS */
+.suite-obsolete-snapshots {
+  margin-bottom: 0.25rem;
+  padding: 1rem;
+  background-color: var(--danger-bright);
+  color: var(--danger);
+}
+.suite-obsolete-snapshots-header {
+  font-weight: bold;
+}
+.suite-obsolete-snapshots-item {
+  padding: 0.5rem;
+}
+.suite-obsolete-snapshots-item pre {
+  margin: 0.5rem 0;
+  white-space: pre-wrap;
+  white-space: -moz-pre-wrap;
+  white-space: -pre-wrap;
+  white-space: -o-pre-wrap;
+  word-wrap: break-word;
+}
+.suite-obsolete-snapshots-item-message {
+  color: var(--text-primary);
+  font-size: 1rem;
+  padding: 0 0.5rem;
+}
+</style></head><body><main class="jesthtml-content"><header><h1 id="title">Test Report</h1></header><section id="metadata-container"><div id="timestamp">Started: 2025-04-01 05:17:09</div><div id="summary"><div id="suite-summary"><div class="summary-total">Suites (15)</div><div class="summary-passed ">13 passed</div><div class="summary-failed ">2 failed</div><div class="summary-pending  summary-empty">0 pending</div></div><div id="test-summary"><div class="summary-total">Tests (146)</div><div class="summary-passed ">142 passed</div><div class="summary-failed ">4 failed</div><div class="summary-pending  summary-empty">0 pending</div></div></div></section><details id="suite-1" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/Users/aishaakram/Downloads/api-6/src/__tests__/medication-notifications.service.test.ts</div><div class="suite-time warn">5.583s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">Medication Notifications Service &gt; checkOverdueMedications</div><div class="test-title">should send notification for overdue medication</div><div class="test-status">passed</div><div class="test-duration">0.013s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Medication Notifications Service &gt; checkOverdueMedications</div><div class="test-title">should not send notification if caregiver notification is disabled</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Medication Notifications Service &gt; checkOverdueMedications</div><div class="test-title">should not send notification if caregiver is already notified</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">Medication Notifications Service &gt; checkOverdueMedications</div><div class="test-title">should handle missing patient user</div><div class="test-status">failed</div><div class="test-duration">0.002s</div></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">Medication Notifications Service &gt; checkOverdueMedications</div><div class="test-title">should handle missing caregiver user</div><div class="test-status">failed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Medication Notifications Service &gt; checkOverdueMedications</div><div class="test-title">should handle error when checking medications</div><div class="test-status">passed</div><div class="test-duration">0.035s</div></div></div></div></details><details id="suite-2" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/Users/aishaakram/Downloads/api-6/src/__tests__/task-notifications.service.test.ts</div><div class="suite-time warn">6.762s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">Task Notifications Service &gt; checkOverdueTasks</div><div class="test-title">should send notification for overdue task</div><div class="test-status">passed</div><div class="test-duration">0.027s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Task Notifications Service &gt; checkOverdueTasks</div><div class="test-title">should not send notification if caregiver notification is disabled</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Task Notifications Service &gt; checkOverdueTasks</div><div class="test-title">should not send notification if caregiver is already notified</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">Task Notifications Service &gt; checkOverdueTasks</div><div class="test-title">should handle missing patient user</div><div class="test-status">failed</div><div class="test-duration">0.007s</div></div></div><div class="test-result failed"><div class="test-info"><div class="test-suitename">Task Notifications Service &gt; checkOverdueTasks</div><div class="test-title">should handle missing caregiver user</div><div class="test-status">failed</div><div class="test-duration">0.004s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Task Notifications Service &gt; checkOverdueTasks</div><div class="test-title">should handle error when checking tasks</div><div class="test-status">passed</div><div class="test-duration">0.026s</div></div></div></div></details><details id="suite-3" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/Users/aishaakram/Downloads/api-6/src/__tests__/medication-reminders.test.ts</div><div class="suite-time">2s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">Medication Reminders Endpoints</div><div class="test-title">should get all medication reminders</div><div class="test-status">passed</div><div class="test-duration">0.079s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Medication Reminders Endpoints</div><div class="test-title">should update a medication reminder</div><div class="test-status">passed</div><div class="test-duration">0.05s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Medication Reminders Endpoints</div><div class="test-title">should delete a medication reminder</div><div class="test-status">passed</div><div class="test-duration">0.006s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Medication Reminders Endpoints &gt; POST /medication-reminders</div><div class="test-title">should return 404 when user not found</div><div class="test-status">passed</div><div class="test-duration">0.017s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Medication Reminders Endpoints &gt; POST /medication-reminders</div><div class="test-title">should return 403 for non-patient/caregiver users</div><div class="test-status">passed</div><div class="test-duration">0.006s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Medication Reminders Endpoints &gt; POST /medication-reminders/:id/verify</div><div class="test-title">should verify a medication reminder with photo</div><div class="test-status">passed</div><div class="test-duration">0.009s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Medication Reminders Endpoints &gt; POST /medication-reminders/:id/verify</div><div class="test-title">should return 400 when medication verification fails</div><div class="test-status">passed</div><div class="test-duration">0.017s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Medication Reminders Endpoints &gt; POST /medication-reminders/:id/verify</div><div class="test-title">should return 404 when non-patient tries to verify</div><div class="test-status">passed</div><div class="test-duration">0.012s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Medication Reminders Endpoints &gt; Access Control Tests</div><div class="test-title">should deny access to reminders of other patients</div><div class="test-status">passed</div><div class="test-duration">0.02s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Medication Reminders Endpoints &gt; Access Control Tests</div><div class="test-title">should allow caregivers to access their patient's reminders</div><div class="test-status">passed</div><div class="test-duration">0.012s</div></div></div></div></details><details id="suite-4" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/Users/aishaakram/Downloads/api-6/src/__tests__/auth.test.ts</div><div class="suite-time warn">8.024s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">Authentication Endpoints &gt; POST /auth/register</div><div class="test-title">should register a new user</div><div class="test-status">passed</div><div class="test-duration">0.126s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Authentication Endpoints &gt; POST /auth/register</div><div class="test-title">should return 409 if user already exists</div><div class="test-status">passed</div><div class="test-duration">0.055s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Authentication Endpoints &gt; POST /auth/register</div><div class="test-title">should handle server errors during registration</div><div class="test-status">passed</div><div class="test-duration">0.006s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Authentication Endpoints &gt; POST /auth/login</div><div class="test-title">should login successfully</div><div class="test-status">passed</div><div class="test-duration">0.01s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Authentication Endpoints &gt; POST /auth/login</div><div class="test-title">should return 401 for invalid credentials</div><div class="test-status">passed</div><div class="test-duration">0.009s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Authentication Endpoints &gt; POST /auth/login</div><div class="test-title">should return 409 if user does not exist</div><div class="test-status">passed</div><div class="test-duration">0.003s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Authentication Endpoints &gt; POST /auth/login</div><div class="test-title">should handle server errors during login</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Authentication Endpoints &gt; POST /auth/registerCaregiver</div><div class="test-title">should return 409 if caregiver email already exists</div><div class="test-status">passed</div><div class="test-duration">0.007s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Authentication Endpoints &gt; POST /auth/registerCaregiver</div><div class="test-title">should handle server errors during caregiver registration</div><div class="test-status">passed</div><div class="test-duration">0.004s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Authentication Endpoints &gt; POST /auth/registerPatient</div><div class="test-title">should register a new patient successfully</div><div class="test-status">passed</div><div class="test-duration">0.01s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Authentication Endpoints &gt; POST /auth/registerPatient</div><div class="test-title">should handle server errors during patient registration</div><div class="test-status">passed</div><div class="test-duration">0.009s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Authentication Endpoints</div><div class="test-title">should get user profile</div><div class="test-status">passed</div><div class="test-duration">0.011s</div></div></div></div></details><details id="suite-5" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/Users/aishaakram/Downloads/api-6/src/__tests__/fall-events.route.test.ts</div><div class="suite-time warn">8.161s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">Fall Events Routes &gt; POST /fall-events</div><div class="test-title">should return 403 if user is not a patient</div><div class="test-status">passed</div><div class="test-duration">0.099s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Fall Events Routes &gt; POST /fall-events</div><div class="test-title">should return error if patient not found</div><div class="test-status">passed</div><div class="test-duration">0.069s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Fall Events Routes &gt; GET /fall-events</div><div class="test-title">should return 404 if user not found</div><div class="test-status">passed</div><div class="test-duration">0.007s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Fall Events Routes &gt; GET /fall-events</div><div class="test-title">should return 404 if patient not found</div><div class="test-status">passed</div><div class="test-duration">0.006s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Fall Events Routes &gt; GET /fall-events/:id</div><div class="test-title">should return a single fall event for authorized patient</div><div class="test-status">passed</div><div class="test-duration">0.009s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Fall Events Routes &gt; GET /fall-events/:id</div><div class="test-title">should return 404 if fall event not found</div><div class="test-status">passed</div><div class="test-duration">0.011s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Fall Events Routes &gt; GET /fall-events/:id</div><div class="test-title">should return 403 if patient tries to access another patient's event</div><div class="test-status">passed</div><div class="test-duration">0.003s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Fall Events Routes &gt; PATCH /fall-events/:id/status</div><div class="test-title">should update fall event status to confirmed</div><div class="test-status">passed</div><div class="test-duration">0.007s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Fall Events Routes &gt; PATCH /fall-events/:id/status</div><div class="test-title">should update fall event status to resolved</div><div class="test-status">passed</div><div class="test-duration">0.016s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Fall Events Routes &gt; PATCH /fall-events/:id/status</div><div class="test-title">should return 400 for invalid status</div><div class="test-status">passed</div><div class="test-duration">0.004s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Fall Events Routes &gt; PATCH /fall-events/:id/status</div><div class="test-title">should return 403 if user not authorized to update event</div><div class="test-status">passed</div><div class="test-duration">0.018s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Fall Events Routes &gt; PATCH /fall-events/:id/dismiss</div><div class="test-title">should dismiss a fall event</div><div class="test-status">passed</div><div class="test-duration">0.008s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Fall Events Routes &gt; PATCH /fall-events/:id/dismiss</div><div class="test-title">should return 404 if fall event not found</div><div class="test-status">passed</div><div class="test-duration">0.011s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Fall Events Routes &gt; PATCH /fall-events/:id/dismiss</div><div class="test-title">should return 403 if user not authorized to dismiss event</div><div class="test-status">passed</div><div class="test-duration">0.013s</div></div></div></div></details><details id="suite-6" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/Users/aishaakram/Downloads/api-6/src/__tests__/inventory.test.ts</div><div class="suite-time warn">8.122s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">Inventory Endpoints &gt; GET /inventory</div><div class="test-title">should get all inventory items</div><div class="test-status">passed</div><div class="test-duration">0.088s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Inventory Endpoints &gt; GET /inventory</div><div class="test-title">should return 404 if user not found</div><div class="test-status">passed</div><div class="test-duration">0.034s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Inventory Endpoints &gt; GET /inventory</div><div class="test-title">should return 404 if patient not found</div><div class="test-status">passed</div><div class="test-duration">0.006s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Inventory Endpoints &gt; PUT /inventory/:id</div><div class="test-title">should update an inventory item</div><div class="test-status">passed</div><div class="test-duration">0.072s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Inventory Endpoints &gt; PUT /inventory/:id</div><div class="test-title">should set needsReplenishment when quantity is below threshold</div><div class="test-status">passed</div><div class="test-duration">0.018s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Inventory Endpoints &gt; PUT /inventory/:id</div><div class="test-title">should return 403 if user is not authorized to update item</div><div class="test-status">passed</div><div class="test-duration">0.013s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Inventory Endpoints &gt; DELETE /inventory/:id</div><div class="test-title">should delete an inventory item</div><div class="test-status">passed</div><div class="test-duration">0.007s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Inventory Endpoints &gt; DELETE /inventory/:id</div><div class="test-title">should return 404 if item not found</div><div class="test-status">passed</div><div class="test-duration">0.012s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Inventory Endpoints &gt; POST /inventory/:id/use</div><div class="test-title">should mark an item as used and update quantity</div><div class="test-status">passed</div><div class="test-duration">0.006s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Inventory Endpoints &gt; POST /inventory/:id/use</div><div class="test-title">should set needsReplenishment when quantity goes below threshold</div><div class="test-status">passed</div><div class="test-duration">0.009s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Inventory Endpoints &gt; POST /inventory/:id/use</div><div class="test-title">should not allow negative quantity</div><div class="test-status">passed</div><div class="test-duration">0.004s</div></div></div></div></details><details id="suite-7" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/Users/aishaakram/Downloads/api-6/src/__tests__/patients.test.ts</div><div class="suite-time">1.589s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">Patients Endpoints &gt; GET /patients/me</div><div class="test-title">should return patient info</div><div class="test-status">passed</div><div class="test-duration">0.077s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Patients Endpoints &gt; GET /patients/me</div><div class="test-title">should return 404 when user is not found</div><div class="test-status">passed</div><div class="test-duration">0.02s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Patients Endpoints &gt; GET /patients/me</div><div class="test-title">should return 404 when caregiver is not found</div><div class="test-status">passed</div><div class="test-duration">0.03s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Patients Endpoints &gt; GET /patients/me</div><div class="test-title">should return 404 when patient is not found</div><div class="test-status">passed</div><div class="test-duration">0.012s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Patients Endpoints &gt; POST /patients/location-sharing</div><div class="test-title">should enable location sharing</div><div class="test-status">passed</div><div class="test-duration">0.015s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Patients Endpoints &gt; POST /patients/location-sharing</div><div class="test-title">should disable location sharing</div><div class="test-status">passed</div><div class="test-duration">0.004s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Patients Endpoints &gt; POST /patients/location-sharing</div><div class="test-title">should return 404 when non-patient tries to update location sharing</div><div class="test-status">passed</div><div class="test-duration">0.008s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Patients Endpoints &gt; POST /patients/location</div><div class="test-title">should update patient location when sharing is enabled</div><div class="test-status">passed</div><div class="test-duration">0.01s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Patients Endpoints &gt; POST /patients/location</div><div class="test-title">should return 403 when location sharing is disabled</div><div class="test-status">passed</div><div class="test-duration">0.03s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Patients Endpoints &gt; POST /patients/location</div><div class="test-title">should return 404 when non-patient tries to update location</div><div class="test-status">passed</div><div class="test-duration">0.028s</div></div></div></div></details><details id="suite-8" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/Users/aishaakram/Downloads/api-6/src/__tests__/inventory-notifications.service.test.ts</div><div class="suite-time">0.117s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">Inventory Notifications Service &gt; checkLowInventory</div><div class="test-title">should send notification for low inventory item</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Inventory Notifications Service &gt; checkLowInventory</div><div class="test-title">should not send notification if item is already notified</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Inventory Notifications Service &gt; checkLowInventory</div><div class="test-title">should handle missing patient user</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Inventory Notifications Service &gt; checkLowInventory</div><div class="test-title">should handle missing caregiver user</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Inventory Notifications Service &gt; checkLowInventory</div><div class="test-title">should handle error when checking inventory</div><div class="test-status">passed</div><div class="test-duration">0.018s</div></div></div></div></details><details id="suite-9" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/Users/aishaakram/Downloads/api-6/src/__tests__/safezones.route.test.ts</div><div class="suite-time warn">8.627s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">Safezones Routes &gt; POST /safezones</div><div class="test-title">should create a new safezone</div><div class="test-status">passed</div><div class="test-duration">0.087s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Safezones Routes &gt; POST /safezones</div><div class="test-title">should return 403 if user is not a caregiver</div><div class="test-status">passed</div><div class="test-duration">0.021s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Safezones Routes &gt; POST /safezones</div><div class="test-title">should return error if caregiver not found</div><div class="test-status">passed</div><div class="test-duration">0.004s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Safezones Routes &gt; POST /safezones</div><div class="test-title">should return 404 if patient user not found</div><div class="test-status">passed</div><div class="test-duration">0.041s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Safezones Routes &gt; POST /safezones</div><div class="test-title">should return 404 if patient not found</div><div class="test-status">passed</div><div class="test-duration">0.03s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Safezones Routes &gt; GET /safezones</div><div class="test-title">should get all safezones for a patient</div><div class="test-status">passed</div><div class="test-duration">0.01s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Safezones Routes &gt; GET /safezones</div><div class="test-title">should return 404 if patient not found</div><div class="test-status">passed</div><div class="test-duration">0.004s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Safezones Routes &gt; GET /safezones/:id</div><div class="test-title">should get a single safezone by id</div><div class="test-status">passed</div><div class="test-duration">0.003s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Safezones Routes &gt; GET /safezones/:id</div><div class="test-title">should return 404 if safezone not found</div><div class="test-status">passed</div><div class="test-duration">0.053s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Safezones Routes &gt; GET /safezones/:id</div><div class="test-title">should allow patient to access their own safezone</div><div class="test-status">passed</div><div class="test-duration">0.095s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Safezones Routes &gt; PUT /safezones/:id</div><div class="test-title">should return 404 if safezone not found</div><div class="test-status">passed</div><div class="test-duration">0.016s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Safezones Routes &gt; PUT /safezones/:id</div><div class="test-title">should return 403 if user is not authorized to update safezone</div><div class="test-status">passed</div><div class="test-duration">0.009s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Safezones Routes &gt; DELETE /safezones/:id</div><div class="test-title">should return 404 if safezone not found</div><div class="test-status">passed</div><div class="test-duration">0.013s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Safezones Routes &gt; DELETE /safezones/:id</div><div class="test-title">should return 403 if user is not authorized to delete safezone</div><div class="test-status">passed</div><div class="test-duration">0.006s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Safezones Routes &gt; Error handling</div><div class="test-title">should handle database errors gracefully</div><div class="test-status">passed</div><div class="test-duration">0.051s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Safezones Routes &gt; Error handling</div><div class="test-title">should handle invalid token</div><div class="test-status">passed</div><div class="test-duration">0.011s</div></div></div></div></details><details id="suite-10" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/Users/aishaakram/Downloads/api-6/src/__tests__/notifications.service.test.ts</div><div class="suite-time">0.094s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">Notifications Service &gt; sendPushNotification</div><div class="test-title">should send push notification successfully</div><div class="test-status">passed</div><div class="test-duration">0.004s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Notifications Service &gt; sendPushNotification</div><div class="test-title">should handle missing user</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Notifications Service &gt; sendPushNotification</div><div class="test-title">should handle missing caregiver</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Notifications Service &gt; sendPushNotification</div><div class="test-title">should handle missing push token</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Notifications Service &gt; sendPushNotification</div><div class="test-title">should handle invalid push token</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Notifications Service &gt; sendPushNotification</div><div class="test-title">should handle error sending notifications</div><div class="test-status">passed</div><div class="test-duration">0.026s</div></div></div></div></details><details id="suite-11" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/Users/aishaakram/Downloads/api-6/src/__tests__/safezone-notifications.service.test.ts</div><div class="suite-time">0.887s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">Safezone Notifications Service &gt; checkSafezoneViolations</div><div class="test-title">should send notification when patient is outside safezone</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Safezone Notifications Service &gt; checkSafezoneViolations</div><div class="test-title">should not send notification if patient is inside safezone</div><div class="test-status">passed</div><div class="test-duration">0.004s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Safezone Notifications Service &gt; checkSafezoneViolations</div><div class="test-title">should not send notification if location sharing is disabled</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Safezone Notifications Service &gt; checkSafezoneViolations</div><div class="test-title">should not send notification if no safezones exist</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Safezone Notifications Service &gt; checkSafezoneViolations</div><div class="test-title">should not send notification if there is an existing breach</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Safezone Notifications Service &gt; checkSafezoneViolations</div><div class="test-title">should handle missing patient user</div><div class="test-status">passed</div><div class="test-duration"> </div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Safezone Notifications Service &gt; checkSafezoneViolations</div><div class="test-title">should handle missing caregiver user</div><div class="test-status">passed</div><div class="test-duration">0.001s</div></div></div></div></details><details id="suite-12" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/Users/aishaakram/Downloads/api-6/src/__tests__/task-reminders.test.ts</div><div class="suite-time">0.618s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">Task Reminders Endpoints</div><div class="test-title">should get all task reminders</div><div class="test-status">passed</div><div class="test-duration">0.012s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Task Reminders Endpoints</div><div class="test-title">should update a task reminder</div><div class="test-status">passed</div><div class="test-duration">0.076s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Task Reminders Endpoints</div><div class="test-title">should delete a task reminder</div><div class="test-status">passed</div><div class="test-duration">0.004s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Task Reminders Endpoints &gt; Get Specific Task Reminder</div><div class="test-title">should get a specific task reminder</div><div class="test-status">passed</div><div class="test-duration">0.004s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Task Reminders Endpoints &gt; Get Specific Task Reminder</div><div class="test-title">should return 404 when reminder not found</div><div class="test-status">passed</div><div class="test-duration">0.004s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Task Reminders Endpoints &gt; Get Specific Task Reminder</div><div class="test-title">should return 403 when user tries to access another patient's reminder</div><div class="test-status">passed</div><div class="test-duration">0.004s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Task Reminders Endpoints &gt; Complete Task Reminder</div><div class="test-title">should complete a task reminder</div><div class="test-status">passed</div><div class="test-duration">0.003s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Task Reminders Endpoints &gt; Complete Task Reminder</div><div class="test-title">should return 403 when non-patient tries to complete reminder</div><div class="test-status">passed</div><div class="test-duration">0.002s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Task Reminders Endpoints &gt; Error Handling</div><div class="test-title">should handle database errors gracefully</div><div class="test-status">passed</div><div class="test-duration">0.018s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Task Reminders Endpoints &gt; Error Handling</div><div class="test-title">should handle invalid reminder ID format</div><div class="test-status">passed</div><div class="test-duration">0.005s</div></div></div></div></details><details id="suite-13" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/Users/aishaakram/Downloads/api-6/src/__tests__/user.route.test.ts</div><div class="suite-time warn">8.789s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">User Routes &gt; GET /api/users/me</div><div class="test-title">should return patient user data</div><div class="test-status">passed</div><div class="test-duration">0.092s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">User Routes &gt; GET /api/users/me</div><div class="test-title">should return caregiver user data</div><div class="test-status">passed</div><div class="test-duration">0.106s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">User Routes &gt; GET /api/users/me</div><div class="test-title">should return 404 when user not found</div><div class="test-status">passed</div><div class="test-duration">0.011s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">User Routes &gt; GET /api/users/me</div><div class="test-title">should return 404 when patient details not found</div><div class="test-status">passed</div><div class="test-duration">0.053s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">User Routes &gt; GET /api/users/me</div><div class="test-title">should return 404 when caregiver details not found</div><div class="test-status">passed</div><div class="test-duration">0.035s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">User Routes &gt; GET /api/users/me</div><div class="test-title">should handle server errors</div><div class="test-status">passed</div><div class="test-duration">0.054s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">User Routes &gt; PUT /api/users/me</div><div class="test-title">should update user details successfully</div><div class="test-status">passed</div><div class="test-duration">0.02s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">User Routes &gt; PUT /api/users/me</div><div class="test-title">should return 404 when user not found for update</div><div class="test-status">passed</div><div class="test-duration">0.005s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">User Routes &gt; PUT /api/users/me</div><div class="test-title">should handle server errors during update</div><div class="test-status">passed</div><div class="test-duration">0.006s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">User Routes &gt; POST /api/users/me/profile-image</div><div class="test-title">should update profile image successfully</div><div class="test-status">passed</div><div class="test-duration">0.051s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">User Routes &gt; POST /api/users/me/profile-image</div><div class="test-title">should return 400 when no image data provided</div><div class="test-status">passed</div><div class="test-duration">0.015s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">User Routes &gt; POST /api/users/me/profile-image</div><div class="test-title">should return 404 when user not found for profile image update</div><div class="test-status">passed</div><div class="test-duration">0.006s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">User Routes &gt; POST /api/users/me/profile-image</div><div class="test-title">should handle server errors during profile image update</div><div class="test-status">passed</div><div class="test-duration">0.033s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">User Routes &gt; GET /api/users/dashboard</div><div class="test-title">should return 404 when user not found for dashboard</div><div class="test-status">passed</div><div class="test-duration">0.016s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">User Routes &gt; GET /api/users/dashboard</div><div class="test-title">should return 404 when patient details not found for dashboard</div><div class="test-status">passed</div><div class="test-duration">0.013s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">User Routes &gt; GET /api/users/dashboard</div><div class="test-title">should return 404 when caregiver details not found for dashboard</div><div class="test-status">passed</div><div class="test-duration">0.008s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">User Routes &gt; GET /api/users/dashboard</div><div class="test-title">should handle server errors for dashboard</div><div class="test-status">passed</div><div class="test-duration">0.007s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">User Routes &gt; GET /api/users/dashboard &gt; POST /api/users/safezone-breach/:id/dismiss</div><div class="test-title">should return 404 when safezone breach not found</div><div class="test-status">passed</div><div class="test-duration">0.008s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">User Routes &gt; GET /api/users/dashboard &gt; POST /api/users/safezone-breach/:id/dismiss</div><div class="test-title">should handle server errors when dismissing safezone breach</div><div class="test-status">passed</div><div class="test-duration">0.004s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">User Routes &gt; GET /api/users/dashboard &gt; GET /api/users/safezone-breach/:id</div><div class="test-title">should get safezone breach details successfully for patient</div><div class="test-status">passed</div><div class="test-duration">0.003s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">User Routes &gt; GET /api/users/dashboard &gt; GET /api/users/safezone-breach/:id</div><div class="test-title">should get safezone breach details successfully for caregiver</div><div class="test-status">passed</div><div class="test-duration">0.008s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">User Routes &gt; GET /api/users/dashboard &gt; GET /api/users/safezone-breach/:id</div><div class="test-title">should return 404 when safezone breach not found</div><div class="test-status">passed</div><div class="test-duration">0.005s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">User Routes &gt; GET /api/users/dashboard &gt; GET /api/users/safezone-breach/:id</div><div class="test-title">should return 403 when user is not authorized to view breach</div><div class="test-status">passed</div><div class="test-duration">0.005s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">User Routes &gt; GET /api/users/dashboard &gt; GET /api/users/safezone-breach/:id</div><div class="test-title">should handle server errors when getting safezone breach</div><div class="test-status">passed</div><div class="test-duration">0.026s</div></div></div></div></details><details id="suite-14" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/Users/aishaakram/Downloads/api-6/src/__tests__/attention-requests.test.ts</div><div class="suite-time">0.546s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">Attention Requests Endpoints</div><div class="test-title">should get all attention requests</div><div class="test-status">passed</div><div class="test-duration">0.02s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Attention Requests Endpoints</div><div class="test-title">should get a specific attention request</div><div class="test-status">passed</div><div class="test-duration">0.025s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Attention Requests Endpoints</div><div class="test-title">should update an attention request status</div><div class="test-status">passed</div><div class="test-duration">0.026s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Attention Requests Endpoints</div><div class="test-title">should dismiss an attention request</div><div class="test-status">passed</div><div class="test-duration">0.007s</div></div></div></div></details><details id="suite-15" class="suite-container" open=""><summary class="suite-info"><div class="suite-path">/Users/aishaakram/Downloads/api-6/src/__tests__/notifications.test.ts</div><div class="suite-time">0.639s</div></summary><div class="suite-tests"><div class="test-result passed"><div class="test-info"><div class="test-suitename">Notifications Endpoints &gt; POST /notifications/register</div><div class="test-title">should register push token for a caregiver</div><div class="test-status">passed</div><div class="test-duration">0.015s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Notifications Endpoints &gt; POST /notifications/register</div><div class="test-title">should return 400 when token is missing</div><div class="test-status">passed</div><div class="test-duration">0.018s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Notifications Endpoints &gt; POST /notifications/register</div><div class="test-title">should return 403 when non-caregiver tries to register token</div><div class="test-status">passed</div><div class="test-duration">0.011s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Notifications Endpoints &gt; POST /notifications/register</div><div class="test-title">should return 403 when caregiver is not found</div><div class="test-status">passed</div><div class="test-duration">0.008s</div></div></div><div class="test-result passed"><div class="test-info"><div class="test-suitename">Notifications Endpoints &gt; POST /notifications/register</div><div class="test-title">should return 403 when user is not found</div><div class="test-status">passed</div><div class="test-duration">0.01s</div></div></div></div></details></main></body></html>
