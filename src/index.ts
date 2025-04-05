@@ -54,10 +54,29 @@ app.use('/inventory', inventoryRoutes);
 app.use('/safezones', safezonesRouter);
 
 // Start cron jobs
-cron.schedule('*/1 * * * *', checkOverdueTasks);
-cron.schedule('*/1 * * * *', checkOverdueMedications);
-cron.schedule('*/1 * * * *', checkLowInventory);
-cron.schedule('*/1 * * * *', checkSafezoneViolations);
+// cron.schedule('*/1 * * * *', checkOverdueTasks);
+// cron.schedule('*/1 * * * *', checkOverdueMedications);
+// cron.schedule('*/1 * * * *', checkLowInventory);
+// cron.schedule('*/1 * * * *', checkSafezoneViolations);
+cron.schedule('*/1 * * * *', async () => {
+  console.log('Running checkOverdueTasks...');
+  await checkOverdueTasks();
+});
+
+cron.schedule('*/1 * * * *', async () => {
+  console.log('Running checkOverdueMedications...');
+  await checkOverdueMedications();
+});
+
+cron.schedule('*/1 * * * *', async () => {
+  console.log('Running checkLowInventory...');
+  await checkLowInventory();
+});
+
+cron.schedule('*/1 * * * *', async () => {
+  console.log('Running checkSafezoneViolations...');
+  await checkSafezoneViolations();
+});
 
 if (process.env.NODE_ENV !== 'test') {
   app.listen(PORT, () => {

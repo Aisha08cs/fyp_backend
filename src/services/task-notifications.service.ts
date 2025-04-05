@@ -4,12 +4,13 @@ import { sendPushNotification } from './notifications.service';
 
 export async function checkOverdueTasks() {
   try {
+    console.log('Fetching overdue tasks...');
     const tasks = await TaskReminder.find({
       status: 'pending',
       'caregiverNotification.enabled': true,
       caregiverNotified: false,
     }).populate('patientId');
-
+    console.log(`Found ${tasks.length} overdue tasks.`);
     const now = new Date();
 
     for (const task of tasks) {

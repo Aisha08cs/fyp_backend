@@ -4,13 +4,14 @@ import { sendPushNotification } from './notifications.service';
 
 export async function checkOverdueMedications() {
   try {
-    // Get all pending medications that have caregiver notifications enabled
+    console.log('Fetching overdue medications...');
     const medications = await MedicationReminder.find({
       status: 'pending',
       'caregiverNotification.enabled': true,
       caregiverNotified: false,
     }).populate('patientId');
 
+    console.log(`Found ${medications.length} overdue medications.`);
     const now = new Date();
 
     for (const medication of medications) {

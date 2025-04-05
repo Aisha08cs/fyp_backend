@@ -4,6 +4,7 @@
   "description": "Backend API for EverydayEase app",
   "main": "dist/index.js",
   "scripts": {
+    "prestart": "npm run build",
     "start": "node dist/index.js",
     "dev": "nodemon src/index.ts",
     "build": "tsc",

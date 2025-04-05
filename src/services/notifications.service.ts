@@ -7,6 +7,7 @@ const expo = new Expo();
 export async function sendPushNotification(caregiverEmail: string, title: string, body: string, data?: any) {
   try {
     // First find the caregiver's user
+    console.log(`Sending push notification to ${caregiverEmail}...`);
     const caregiverUser = await User.findOne({ email: caregiverEmail });
     if (!caregiverUser) {
       console.log('No user found for caregiver email:', caregiverEmail);
@@ -19,7 +20,7 @@ export async function sendPushNotification(caregiverEmail: string, title: string
       console.log('No push token found for caregiver:', caregiverEmail);
       return;
     }
-
+    console.log(`Push token for ${caregiverEmail}: ${caregiver.pushToken}`);
     if (!Expo.isExpoPushToken(caregiver.pushToken)) {
       console.log(`Push token ${caregiver.pushToken} is not a valid Expo push token`);
       return;
@@ -47,7 +48,7 @@ export async function sendPushNotification(caregiverEmail: string, title: string
         console.error('Error sending push notification:', error);
       }
     }
-
+    console.log('Notification sent successfully:', title);
     return tickets;
   } catch (error) {
     console.error('Error in sendPushNotification:', error);
