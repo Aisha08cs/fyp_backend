@@ -7,7 +7,7 @@
     "prestart": "npm run build",
     "start": "node dist/index.js",
     "dev": "nodemon src/index.ts",
-    "build": "tsc",
+    "build": "node --max-old-space-size=4096 node_modules/.bin/tsc",
     "lint": "eslint . --ext .ts",
     "test": "jest --coverage",
     "test:watch": "jest --watch",
