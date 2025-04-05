@@ -6,7 +6,6 @@ const expo = new Expo();
 
 export async function sendPushNotification(caregiverEmail: string, title: string, body: string, data?: any) {
   try {
-    // First find the caregiver's user
     console.log(`Sending push notification to ${caregiverEmail}...`);
     const caregiverUser = await User.findOne({ email: caregiverEmail });
     if (!caregiverUser) {
@@ -14,12 +13,12 @@ export async function sendPushNotification(caregiverEmail: string, title: string
       return;
     }
 
-    // Then find the caregiver by user ID
     const caregiver = await Caregiver.findOne({ user: caregiverUser._id });
     if (!caregiver || !caregiver.pushToken) {
       console.log('No push token found for caregiver:', caregiverEmail);
       return;
     }
+
     console.log(`Push token for ${caregiverEmail}: ${caregiver.pushToken}`);
     if (!Expo.isExpoPushToken(caregiver.pushToken)) {
       console.log(`Push token ${caregiver.pushToken} is not a valid Expo push token`);
@@ -43,12 +42,13 @@ export async function sendPushNotification(caregiverEmail: string, title: string
       try {
         const ticketChunk = await expo.sendPushNotificationsAsync(chunk);
         tickets.push(...ticketChunk);
-        console.log('Sent the following notifications:', messages.map((m) => m.body).join(', '));
+        console.log(`Sent ${chunk.length} notifications successfully.`);
       } catch (error) {
         console.error('Error sending push notification:', error);
       }
     }
-    console.log('Notification sent successfully:', title);
+
+    console.log('All notifications processed successfully:', title);
     return tickets;
   } catch (error) {
     console.error('Error in sendPushNotification:', error);
