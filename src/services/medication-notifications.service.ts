@@ -15,6 +15,7 @@ export async function checkOverdueMedications() {
     }
     const now = new Date();
     const localNow = new Date(now.getTime()); // Convert UTC to local time
+    localNow.setHours(localNow.getHours()+8);
     console.log('Current time (local):', localNow);
 
     for (const medication of medications) {
@@ -25,7 +26,7 @@ export async function checkOverdueMedications() {
         const [hours, minutes] = medicationTime.split(':').map(Number);
 
         // Create the notification time for today
-        const notificationTime = new Date(); // Start with today's date
+        const notificationTime = new Date(localNow); // Start with today's date
         notificationTime.setHours(hours, minutes, 0, 0); // Set the time to the medication time
         notificationTime.setMilliseconds(0); // Ensure milliseconds are cleared
         
