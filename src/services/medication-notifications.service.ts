@@ -14,7 +14,7 @@ export async function checkOverdueMedications() {
       console.log('No medications matched the query. Check query conditions or database records.');
     }
     const now = new Date();
-    const localNow = new Date(now.getTime() - now.getTimezoneOffset() * 60000); // Convert UTC to local time
+    const localNow = new Date(now.getTime()); // Convert UTC to local time
     console.log('Current time (local):', localNow);
 
     for (const medication of medications) {
@@ -31,7 +31,7 @@ export async function checkOverdueMedications() {
         
         // Adjust notificationTime to the local time zone
         const localNotificationTime = new Date(notificationTime.getTime() - notificationTime.getTimezoneOffset() * 60000);
-        localNotificationTime.setHours(localNotificationTime.getHours() -4);
+        localNotificationTime.setHours(localNotificationTime.getHours());
         const caregiverNotificationTime=localNotificationTime;
         if (medication.caregiverNotification) {
           caregiverNotificationTime.setHours(localNotificationTime.getHours() + medication.caregiverNotification.delayHours);
