@@ -31,20 +31,20 @@ export async function checkOverdueMedications() {
         notificationTime.setMilliseconds(0); // Ensure milliseconds are cleared
         
         // Adjust notificationTime to the local time zone
-        const localNotificationTime = new Date(notificationTime.getTime() - notificationTime.getTimezoneOffset() * 60000);
-        localNotificationTime.setHours(localNotificationTime.getHours());
-        const caregiverNotificationTime=localNotificationTime;
+        //const localNotificationTime = new Date(notificationTime.getTime() - notificationTime.getTimezoneOffset() * 60000);
+        //localNotificationTime.setHours(localNotificationTime.getHours());
+        const caregiverNotificationTime=notificationTime;//fix
         if (medication.caregiverNotification) {
-          caregiverNotificationTime.setHours(localNotificationTime.getHours() + medication.caregiverNotification.delayHours);
+          caregiverNotificationTime.setHours(notificationTime.getHours() + medication.caregiverNotification.delayHours);//fix
           console.log('Caregiver notification time:', caregiverNotificationTime);
         }
         console.log('Hour:', hours);
         console.log('Minute:', minutes);
-        console.log('Notification time (local)-med:',medication.medicationName, localNotificationTime);
+        console.log('Notification time (local)-med:',medication.medicationName, notificationTime);//fix
         console.log('Current time (local)-med:', localNow);
 
         // If it's past the notification time, send the notification
-        if (localNow >= localNotificationTime || (medication.caregiverNotification && localNow >= caregiverNotificationTime)) {
+        if (localNow >= notificationTime || (medication.caregiverNotification && localNow >= caregiverNotificationTime)) {//fix
           // Get the patient's user information
           const patient = medication.patientId as any;
           const patientUser = await User.findById(patient.user);
