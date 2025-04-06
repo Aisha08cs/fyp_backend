@@ -29,7 +29,7 @@ export async function checkOverdueMedications() {
         const notificationTime = new Date(localNow); // Start with today's date
         notificationTime.setHours(hours, minutes, 0, 0); // Set the time to the medication time
         notificationTime.setMilliseconds(0); // Ensure milliseconds are cleared
-        
+        notificationTime.setHours(notificationTime.getHours()-4);
         // Adjust notificationTime to the local time zone
         //const localNotificationTime = new Date(notificationTime.getTime() - notificationTime.getTimezoneOffset() * 60000);
         //localNotificationTime.setHours(localNotificationTime.getHours());

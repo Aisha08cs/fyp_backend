@@ -61,31 +61,33 @@ export async function checkOverdueTasks() {
     }).populate('patientId');
     console.log(`Found ${tasks.length} overdue tasks.`);
     const now = new Date();
-    const localNow = new Date(now.getTime() - now.getTimezoneOffset() * 60000); // Convert UTC to local time
+    const localNow = new Date(now.getTime()); 
+    localNow.setHours(localNow.getHours()+8); // Adjust to local time (HKT)
     console.log('Current time (local):', localNow);
 
     for (const task of tasks) {
       const [hours, minutes] = task.reminderTime.split(':').map(Number);
       
       // Create the notification time for today
-      const notificationTime = new Date();
+      const notificationTime = new Date(localNow);
       notificationTime.setHours(hours, minutes, 0, 0); // Set the time to the task's reminder time
       notificationTime.setMilliseconds(0); // Ensure milliseconds are cleared
-      const localNotificationTime = new Date(notificationTime.getTime() - notificationTime.getTimezoneOffset() * 60000);
-      localNotificationTime.setHours(localNotificationTime.getHours() -4); // Adjust to local time (HKT)
-      const caregiverNotificationTime=localNotificationTime;
+      notificationTime.setHours(notificationTime.getHours()-4);
+      // const localNotificationTime = new Date(notificationTime.getTime() - notificationTime.getTimezoneOffset() * 60000);
+      // localNotificationTime.setHours(localNotificationTime.getHours() -4); // Adjust to local time (HKT)
+      const caregiverNotificationTime=notificationTime;//fix
       if (task.caregiverNotification) {
-        caregiverNotificationTime.setHours(localNotificationTime.getHours() + task.caregiverNotification.delayHours);
+        caregiverNotificationTime.setHours(notificationTime.getHours() + task.caregiverNotification.delayHours);//fix
         console.log('Caregiver notification time:', caregiverNotificationTime);
       }
 
       console.log('Hour:', hours);
       console.log('Minute:', minutes);
-      console.log('Notification time (local)-task:', localNotificationTime);
+      console.log('Notification time (local)-task:', notificationTime);//fix
       console.log('Current time (local)-task:', localNow);
 
       // Check if the notification should be sent
-      if (localNow >= localNotificationTime || (task.caregiverNotification && localNow >= caregiverNotificationTime)) {
+      if (localNow >= notificationTime || (task.caregiverNotification && localNow >= caregiverNotificationTime)) {//fix
         const patient = task.patientId as any;
         const patientUser = await User.findById(patient.user);
         if (!patientUser) continue;
@@ -141,93 +143,3 @@ export async function checkOverdueTasks() {
   }
 }
 
-// export async function checkOverdueTasks() {
-//   try {
-//     console.log('Fetching overdue tasks...');
-//     const tasks = await TaskReminder.find({ status: 'pending' }).populate('patientId');
-//     console.log(`Found ${tasks.length} overdue tasks.`);
-    
-//     // Get current time in local timezone (HKT)
-//     const now = new Date();
-//     console.log('Current time (UTC):', now.toISOString());
-
-//     // Create a new date object for the notification time set to today
-//     for (const task of tasks) {
-//       console.log('Task reminder time:', task.reminderTime); // Log the reminder time
-
-//       const [hours, minutes] = task.reminderTime.split(':').map(Number);
-//       console.log('Parsed Hours:', hours);
-//       console.log('Parsed Minutes:', minutes);
-      
-//       // Create the notification time for today in local time (HKT)
-//       const notificationTime = new Date();
-//       notificationTime.setHours(hours, minutes, 0, 0); // Set the time to the task's reminder time
-      
-//       // Adjust the date to ensure it reflects HKT
-//       notificationTime.setHours(notificationTime.getHours() + 8); // Adjust to HKT
-//       console.log('Notification time (local):', notificationTime.toISOString());
-
-//       // If the notification time is in the past, set it for the next day
-//       if (notificationTime <= now) {
-//         notificationTime.setDate(notificationTime.getDate() + 1);
-//         console.log('Notification time adjusted for tomorrow:', notificationTime.toISOString());
-//       }
-
-//       console.log('Current time (local):', now.toISOString());
-
-//       // Check if the notification should be sent
-//       if (now >= notificationTime) {
-//         const patient = task.patientId as any;
-//         const patientUser = await User.findById(patient.user);
-//         if (!patientUser) continue;
-
-//         // Check if the patient has already been notified
-//         if (task.patientNotified) {
-//           console.log(`Patient already notified: ${patientUser.email}`);
-//           continue;
-//         }
-
-//         // Send notification to the patient
-//         console.log(`Sending notification to patient: ${patientUser.email}`);
-//         await sendPushNotification(
-//           patientUser.email,
-//           'Task Reminder',
-//           `You have an overdue task: ${task.taskName}`,
-//           {
-//             taskId: task._id,
-//             taskName: task.taskName,
-//           },
-//         );
-
-//         // Mark the patient as notified
-//         task.patientNotified = true;
-//         task.lastNotificationSent = now;
-//         await task.save();
-
-//         // Send notification to the caregiver (if caregiverNotification is enabled)
-//         if (task.caregiverNotification?.enabled && !task.caregiverNotified) {
-//           const caregiver = await User.findOne({ email: patient.caregiverEmail });
-//           if (caregiver) {
-//             console.log(`Sending notification to caregiver: ${caregiver.email}`);
-//             await sendPushNotification(
-//               caregiver.email,
-//               'Task Overdue Alert',
-//               `${patientUser.firstName} ${patientUser.lastName} has not completed their task: ${task.taskName}`,
-//               {
-//                 taskId: task._id,
-//                 taskName: task.taskName,
-//                 patientName: `${patientUser.firstName} ${patientUser.lastName}`,
-//               },
-//             );
-//             task.caregiverNotified = true;
-//           }
-//         }
-
-//         // Save the task after updating caregiverNotified
-//         await task.save();
-//       }
-//     }
-//   } catch (error) {
-//     console.error('Error checking overdue tasks:', error);
-//   }
-// }
