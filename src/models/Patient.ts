@@ -5,6 +5,7 @@ export interface IPatient extends Document {
   user: IUser['_id'];
   uniqueCode: number;
   caregiverEmail: string | null;
+  pushToken?: string; // Add pushToken field
   locationSharing?: {
     enabled: boolean;
     lastLocation?: {
@@ -18,6 +19,7 @@ export interface IPatient extends Document {
 const PatientSchema = new Schema<IPatient>(
   {
     user: { type: Schema.Types.ObjectId, ref: 'UserInfo', required: true },
+    pushToken: { type: String }, // Add pushToken field
     uniqueCode: { type: Number, required: true },
     caregiverEmail: { type: String, default: null },
     locationSharing: {

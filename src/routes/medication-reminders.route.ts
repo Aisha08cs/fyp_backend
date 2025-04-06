@@ -50,7 +50,7 @@ router.post('/', authenticateJWT, async (req, res) => {
       ...req.body,
       patientId: targetPatientId,
     });
-
+    //console.log('Creating reminder:', reminder); 
     await reminder.save();
 
     res.status(201).json({ status: 'ok', data: reminder });

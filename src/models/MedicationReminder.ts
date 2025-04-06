@@ -19,6 +19,7 @@ export interface IMedicationReminder extends Document {
   };
   lastNotificationSent?: Date;
   caregiverNotified?: boolean;
+  patientNotified?: boolean;
   caregiverNotification?: {
     enabled: boolean;
     delayHours: number;
@@ -65,7 +66,10 @@ const MedicationReminderSchema = new Schema(
     startDate: {
       type: Date,
       required: true,
-      default: Date.now,
+      default: () => {
+        const now = new Date();
+        return new Date(now.getTime() - now.getTimezoneOffset() * 60000); // Adjust to local time
+      },
     },
     endDate: {
       type: Date,
@@ -97,6 +101,10 @@ const MedicationReminderSchema = new Schema(
       type: Date,
     },
     caregiverNotified: {
+      type: Boolean,
+      default: false,
+    },
+    patientNotified: {
       type: Boolean,
       default: false,
     },

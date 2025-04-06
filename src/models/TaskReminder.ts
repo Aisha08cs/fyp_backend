@@ -16,6 +16,7 @@ export interface ITaskReminder extends Document {
   };
   lastNotificationSent?: Date;
   caregiverNotified?: boolean;
+  patientNotified?: boolean;
   createdAt: Date;
   updatedAt: Date;
 }
@@ -78,6 +79,10 @@ const TaskReminderSchema = new Schema(
       type: Date,
     },
     caregiverNotified: {
+      type: Boolean,
+      default: false,
+    },
+    patientNotified: {
       type: Boolean,
       default: false,
     },
